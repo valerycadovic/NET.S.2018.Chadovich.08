@@ -6,7 +6,7 @@
 
     public class ListRepository : IRepository
     {
-        private List<BankAccount> accounts = new List<BankAccount>();
+        private HashSet<BankAccount> accounts = new HashSet<BankAccount>();
 
         public void Save(BankAccount account, string id)
         {
@@ -15,24 +15,10 @@
                 throw new ArgumentNullException($"{nameof(account)} is null");
             }
 
-            BankAccount current = null;
-            
-            foreach (var item in this.accounts)
+            if (!accounts.Contains(account))
             {
-                if (item.Id == id)
-                {
-                    current = item;
-                    break;
-                }
+                accounts.Add(account);
             }
-
-            if (current is null)
-            {
-                this.accounts.Add(account);
-                return;
-            }
-
-            current = account;
         }
 
         public BankAccount GetById(string id)

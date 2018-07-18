@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BankSystem
+﻿namespace BankSystem
 {
-    public abstract class BankAccount
+    using System;
+
+    public abstract class BankAccount : IEquatable<BankAccount>
     {
         private readonly AccountHolder holder;
-        
+
         private int bonusPoints;
 
         private readonly IMoneyAccuracyCalculator rounder;
@@ -23,12 +19,52 @@ namespace BankSystem
             this.rounder = rounder;
             this.holder = holder;
         }
-        
+
         public string Id { get; }
 
         public AccountStatus Status { get; set; }
-        
+
         public decimal Balance { get; protected set; }
+
+        public bool Equals(BankAccount other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return string.Equals(Id, other.Id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((BankAccount)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id != null ? Id.GetHashCode() : 0;
+        }
 
         public void Deposit(decimal amount)
         {
@@ -37,7 +73,7 @@ namespace BankSystem
             decimal roundedAmount = this.rounder.RoundUp(amount);
 
             ValidateOnAmount(roundedAmount, nameof(amount));
-            
+
             IncreaseBalance(roundedAmount);
             IncreaseBonusPoints(roundedAmount);
         }
