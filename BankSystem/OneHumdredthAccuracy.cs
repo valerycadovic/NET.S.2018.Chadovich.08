@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BankSystem
 {
-    public interface IAccountType
+    public class OneHumdredthAccuracy : IMoneyAccuracyCalculator
     {
-        decimal Increase(decimal d);
-        decimal Decrease(decimal d);
+        public decimal RoundUp(decimal exactAmount) => Math.Round(exactAmount, 2);
     }
 }

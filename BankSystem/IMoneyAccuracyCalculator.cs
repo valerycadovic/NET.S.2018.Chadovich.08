@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace BankSystem
 {
-    public interface IAccount
+    public interface IMoneyAccuracyCalculator
     {
-        Client Owner { get; }
-        void Deposit(decimal amount);
-        void Withdraw(decimal amount);
+        decimal RoundUp(decimal exactAmount);
     }
 }

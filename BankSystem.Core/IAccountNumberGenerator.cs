@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankSystem
+namespace BankSystem.Core
 {
-    public interface IBonusState
+    public interface IAccountNumberGenerator
     {
-        void Increase();
-        void Release();
+        string GenerateAccountNumber();
     }
 }

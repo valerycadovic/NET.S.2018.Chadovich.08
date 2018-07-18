@@ -6,63 +6,85 @@ using System.Threading.Tasks;
 
 namespace BankSystem
 {
-    public class BankAccount : IAccount
+    public abstract class BankAccount
     {
-        private decimal cash;
+        private readonly AccountHolder holder;
+        
+        private int bonusPoints;
 
-        public BankAccount(Client owner, IAccountType accountType)
+        private readonly IMoneyAccuracyCalculator rounder;
+
+        protected BankAccount(string id, AccountHolder holder, IMoneyAccuracyCalculator rounder)
         {
-            this.Owner = owner ?? throw new ArgumentNullException($"{nameof(owner)} is null");
-            this.AccountType = accountType ?? throw new ArgumentNullException($"{nameof(accountType)} is null");
-            this.Id = Guid.NewGuid();
+            ValidateOnNull(holder, nameof(holder));
+            ValidateOnNull(rounder, nameof(rounder));
+
+            this.Id = id;
+            this.rounder = rounder;
+            this.holder = holder;
         }
+        
+        public string Id { get; }
 
-        public Client Owner { get; }
-
-        public Guid Id { get; }
-
-        public IAccountType AccountType { get; internal set; }
-
-        public decimal Cash
-        {
-            get => this.cash;
-            private set
-            {
-                if (value <= 0)
-                {
-                    throw new InvalidOperationException($"{nameof(value)} must be positive!");
-                }
-
-                this.cash = value;
-            }
-        }
+        public AccountStatus Status { get; set; }
+        
+        public decimal Balance { get; protected set; }
 
         public void Deposit(decimal amount)
         {
-            decimal roundedAmount = Math.Round(amount, 2);
+            ValidateOnStatus(nameof(this.Deposit));
 
-            if (roundedAmount <= 0)
-            {
-                throw new InvalidOperationException($"{nameof(amount)} must be positive");
-            }
+            decimal roundedAmount = this.rounder.RoundUp(amount);
 
-            roundedAmount += AccountType.Increase(roundedAmount);
-
-            this.Cash += roundedAmount;
+            ValidateOnAmount(roundedAmount, nameof(amount));
+            
+            IncreaseBalance(roundedAmount);
+            IncreaseBonusPoints(roundedAmount);
         }
 
         public void Withdraw(decimal amount)
         {
-            decimal roundedAmount = Math.Round(amount, 2);
+            ValidateOnStatus(nameof(this.Withdraw));
 
-            if (roundedAmount <= 0)
+            decimal roundedAmount = this.rounder.RoundUp(amount);
+
+            ValidateOnAmount(roundedAmount, nameof(amount));
+
+            DecreaseBalance(roundedAmount);
+            DecreaseBonusPoints(roundedAmount);
+        }
+
+        protected abstract void IncreaseBalance(decimal amount);
+
+        protected abstract void DecreaseBalance(decimal amount);
+
+        protected abstract void IncreaseBonusPoints(decimal amount);
+
+        protected abstract void DecreaseBonusPoints(decimal amount);
+
+        private static void ValidateOnNull<T>(T obj, string name) where T : class
+        {
+            if (obj is null)
             {
-                throw new InvalidOperationException($"{nameof(amount)} must be positive");
+                throw new ArgumentNullException($"{name} is null");
             }
+        }
 
-            roundedAmount -= AccountType.Decrease(roundedAmount);
+        private static void ValidateOnAmount(decimal amount, string name)
+        {
+            if (amount <= 0M)
+            {
+                throw new ArgumentOutOfRangeException($"{name} must be positive to be performed");
+            }
+        }
 
-            this.Cash -= roundedAmount;
+        private void ValidateOnStatus(string operationName)
+        {
+            if (this.Status != AccountStatus.Open)
+            {
+                throw new InvalidOperationException($"{operationName} cannot be executed " +
+                                                    $"while account status is not {nameof(AccountStatus.Open)}");
+            }
         }
     }
 }
