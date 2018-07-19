@@ -1,26 +1,27 @@
-﻿namespace BankSystem
+﻿using BankSystem.Core;
+
+namespace BankSystem
 {
     using System;
 
     public abstract class BankAccount : IEquatable<BankAccount>
-    {
-        private readonly AccountHolder holder;
-
-        private int bonusPoints;
-
+    { 
         private readonly IMoneyAccuracyCalculator rounder;
 
-        protected BankAccount(string id, AccountHolder holder, IMoneyAccuracyCalculator rounder)
+        protected BankAccount(AccountHolder holder, IAccountNumberGenerator idGenerator, IMoneyAccuracyCalculator rounder = null)
         {
             ValidateOnNull(holder, nameof(holder));
-            ValidateOnNull(rounder, nameof(rounder));
 
-            this.Id = id;
-            this.rounder = rounder;
-            this.holder = holder;
+            this.Id = idGenerator.GenerateAccountNumber();
+            this.rounder = rounder ?? new OneHundredthAccuracy();
+            this.Holder = holder;
         }
 
         public string Id { get; }
+
+        public int BonusPoints { get; protected set; }
+        
+        public AccountHolder Holder { get; }
 
         public AccountStatus Status { get; set; }
 

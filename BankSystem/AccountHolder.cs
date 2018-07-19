@@ -4,12 +4,10 @@
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
-    public class AccountHolder
+    public class AccountHolder : IEquatable<AccountHolder>
     {
         #region Private fields
         private string phone;
-
-        private string address;
 
         private string email;
 
@@ -60,11 +58,59 @@
                 {
                     throw new FormatException($"{nameof(value)} has wrong email format");
                 }
+
+                this.phone = value;
             }
         }
         #endregion
-        
+
         #region Public API
+        public bool Equals(AccountHolder other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return string.Equals(phone, other.phone) && string.Equals(email, other.email) && string.Equals(Name, other.Name);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((AccountHolder)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hashCode = (phone != null ? phone.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (email != null ? email.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                return hashCode;
+            }
+        }
+
         public void AddAccount(BankAccount account)
         {
             if (account is null)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankSystem
 {
-    public class OneHumdredthAccuracy : IMoneyAccuracyCalculator
+    public class OneHundredthAccuracy : IMoneyAccuracyCalculator
     {
         public decimal RoundUp(decimal exactAmount) => Math.Round(exactAmount, 2);
     }

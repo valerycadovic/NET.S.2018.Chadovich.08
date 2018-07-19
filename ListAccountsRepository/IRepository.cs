@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BankSystem;
-
-namespace ListAccountsRepository
+﻿namespace ListAccountsRepository
 {
+    using System.Collections.Generic;
+    using BankSystem;
+
     public interface IRepository
     {
-        void Save(BankAccount account, string id);
+        void Save(BankAccount account);
         BankAccount GetById(string id);
+        IEnumerable<BankAccount> GetAll();
     }
 }
