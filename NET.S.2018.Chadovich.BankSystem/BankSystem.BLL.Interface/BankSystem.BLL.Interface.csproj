@@ -50,7 +50,7 @@
     <Compile Include="Entities\Accounts\SilverAccount.cs" />
     <Compile Include="Entities\GuidNumberGenerator.cs" />
     <Compile Include="Interfaces\IAccountService.cs" />
-    <Compile Include="Interfaces\IBonusScorer.cs" />
+    <Compile Include="Interfaces\IBonusCalculator.cs" />
     <Compile Include="Interfaces\INumberGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

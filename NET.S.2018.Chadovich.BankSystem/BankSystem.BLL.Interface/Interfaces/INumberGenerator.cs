@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BankSystem.BLL.Interface.Interfaces
+﻿namespace BankSystem.BLL.Interface.Interfaces
 {
+    /// <summary>
+    /// Exposes a bank number generator
+    /// </summary>
     public interface INumberGenerator
     {
+        /// <summary>
+        /// Generates the new bank account number.
+        /// </summary>
+        /// <returns>
+        /// New bank account number
+        /// </returns>
         string GenerateNew();
     }
 }

@@ -9,7 +9,7 @@ namespace BankSystem.BLL.Interface.Entities.Accounts
 {
     public sealed class GoldAccount : Account
     {
-        public GoldAccount(string number, AccountHolder holder, IBonusScorer scorer, AccountStatus status) : base(number, holder, scorer, status)
+        public GoldAccount(string number, AccountHolder holder, IBonusCalculator scorer, AccountStatus status) : base(number, holder, scorer, status)
         {
         }
 
