@@ -12,12 +12,12 @@ namespace ORM.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeSetting
+    public partial class TypeSettings
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeSetting()
+        public TypeSettings()
         {
-            this.Accounts = new HashSet<Account>();
+            this.Accounts = new HashSet<Accounts>();
         }
     
         public int Id { get; set; }
@@ -26,6 +26,6 @@ namespace ORM.Model
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Accounts> Accounts { get; set; }
     }
 }

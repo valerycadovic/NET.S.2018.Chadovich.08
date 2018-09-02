@@ -13,10 +13,10 @@ namespace ORM.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class bank_accountEntities1 : DbContext
+    public partial class bank_accountEntities2 : DbContext
     {
-        public bank_accountEntities1()
-            : base("name=bank_accountEntities1")
+        public bank_accountEntities2()
+            : base("name=bank_accountEntities2")
         {
         }
     
@@ -25,8 +25,8 @@ namespace ORM.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Holder> Holders { get; set; }
-        public virtual DbSet<TypeSetting> TypeSettings { get; set; }
+        public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<Holders> Holders { get; set; }
+        public virtual DbSet<TypeSettings> TypeSettings { get; set; }
     }
 }

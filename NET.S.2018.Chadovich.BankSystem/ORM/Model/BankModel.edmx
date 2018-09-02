@@ -22,6 +22,7 @@
           </Key>
           <Property Name="PassportId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="AccountIBAN" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -76,7 +77,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bank_accountModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account">
+        <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="IBAN" />
           </Key>
@@ -86,21 +87,21 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="HolderId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TypeSettingsId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Holder" Relationship="Self.FK_Accounts_Holders" FromRole="Accounts" ToRole="Holders" />
-          <NavigationProperty Name="TypeSetting" Relationship="Self.FK_Accounts_TypeSettings" FromRole="Accounts" ToRole="TypeSettings" />
+          <NavigationProperty Name="Holders" Relationship="Self.FK_Accounts_Holders" FromRole="Accounts" ToRole="Holders" />
+          <NavigationProperty Name="TypeSettings" Relationship="Self.FK_Accounts_TypeSettings" FromRole="Accounts" ToRole="TypeSettings" />
         </EntityType>
-        <EntityType Name="Holder">
+        <EntityType Name="Holders">
           <Key>
             <PropertyRef Name="PassportId" />
           </Key>
           <Property Name="PassportId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="AccountIBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Holders" FromRole="Holders" ToRole="Accounts" />
-          <Property Name="Email" Type="String" Nullable="false" />
         </EntityType>
-        <EntityType Name="TypeSetting">
+        <EntityType Name="TypeSettings">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -111,8 +112,8 @@
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_TypeSettings" FromRole="TypeSettings" ToRole="Accounts" />
         </EntityType>
         <Association Name="FK_Accounts_Holders">
-          <End Role="Holders" Type="Self.Holder" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <End Role="Holders" Type="Self.Holders" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Holders">
               <PropertyRef Name="PassportId" />
@@ -123,8 +124,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Accounts_TypeSettings">
-          <End Role="TypeSettings" Type="Self.TypeSetting" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
+          <End Role="TypeSettings" Type="Self.TypeSettings" Multiplicity="1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeSettings">
               <PropertyRef Name="Id" />
@@ -134,10 +135,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bank_accountEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
-          <EntitySet Name="Holders" EntityType="Self.Holder" />
-          <EntitySet Name="TypeSettings" EntityType="Self.TypeSetting" />
+        <EntityContainer Name="bank_accountEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="Holders" EntityType="Self.Holders" />
+          <EntitySet Name="TypeSettings" EntityType="Self.TypeSettings" />
           <AssociationSet Name="FK_Accounts_Holders" Association="Self.FK_Accounts_Holders">
             <End Role="Holders" EntitySet="Holders" />
             <End Role="Accounts" EntitySet="Accounts" />
@@ -152,9 +153,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище bank_accountModelContainer" CdmEntityContainer="bank_accountEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище bank_accountModelContainer" CdmEntityContainer="bank_accountEntities2">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="bank_accountModel.Account">
+            <EntityTypeMapping TypeName="bank_accountModel.Accounts">
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="IBAN" ColumnName="IBAN" />
                 <ScalarProperty Name="Bonuses" ColumnName="Bonuses" />
@@ -166,17 +167,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Holders">
-            <EntityTypeMapping TypeName="bank_accountModel.Holder">
+            <EntityTypeMapping TypeName="bank_accountModel.Holders">
               <MappingFragment StoreEntitySet="Holders">
                 <ScalarProperty Name="PassportId" ColumnName="PassportId" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="AccountIBAN" ColumnName="AccountIBAN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeSettings">
-            <EntityTypeMapping TypeName="bank_accountModel.TypeSetting">
+            <EntityTypeMapping TypeName="bank_accountModel.TypeSettings">
               <MappingFragment StoreEntitySet="TypeSettings">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="WithdrawalCost" ColumnName="WithdrawalCost" />
@@ -199,7 +201,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
