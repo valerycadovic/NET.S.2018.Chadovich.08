@@ -98,6 +98,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="AccountIBAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Accounts_Holders" FromRole="Holders" ToRole="Accounts" />
+          <Property Name="Email" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeSetting">
           <Key>

@@ -24,6 +24,7 @@ namespace ORM.Model
         public string FullName { get; set; }
         public bool IsActive { get; set; }
         public string AccountIBAN { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
