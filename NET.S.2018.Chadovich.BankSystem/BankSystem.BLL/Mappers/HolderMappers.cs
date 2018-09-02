@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BankSystem.DAL.Interface.Interfaces
+namespace BankSystem.BLL.Mappers
 {
-    public interface IUnitOfWork : IDisposable
+    class HolderMappers
     {
-        void Commit();
     }
 }

@@ -8,7 +8,9 @@ namespace BankSystem.DAL.Interface.DTO
 {
     public class DalAccount : IEntity
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
+        
+        public string Number { get; set; }
 
         public DalHolder Holder { get; set; }
 

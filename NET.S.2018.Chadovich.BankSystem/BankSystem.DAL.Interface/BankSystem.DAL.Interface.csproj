@@ -47,7 +47,7 @@
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IHolderRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IUnutOfWork.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
