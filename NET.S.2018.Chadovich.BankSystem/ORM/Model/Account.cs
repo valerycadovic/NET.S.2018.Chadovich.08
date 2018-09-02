@@ -12,7 +12,7 @@ namespace ORM.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Accounts
+    public partial class Account
     {
         public string IBAN { get; set; }
         public int Bonuses { get; set; }
@@ -21,7 +21,7 @@ namespace ORM.Model
         public string HolderId { get; set; }
         public int TypeSettingsId { get; set; }
     
-        public virtual Holders Holders { get; set; }
-        public virtual TypeSettings TypeSettings { get; set; }
+        public virtual Holder Holder { get; set; }
+        public virtual TypeSetting TypeSetting { get; set; }
     }
 }

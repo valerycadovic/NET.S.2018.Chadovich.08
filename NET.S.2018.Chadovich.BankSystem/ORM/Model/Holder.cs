@@ -12,20 +12,21 @@ namespace ORM.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeSettings
+    public partial class Holder
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeSettings()
+        public Holder()
         {
-            this.Accounts = new HashSet<Accounts>();
+            this.Accounts = new HashSet<Account>();
         }
     
-        public int Id { get; set; }
-        public int WithdrawalCost { get; set; }
-        public int DepositCost { get; set; }
-        public string Name { get; set; }
+        public string PassportId { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public bool IsActive { get; set; }
+        public string AccountIBAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accounts> Accounts { get; set; }
+        public virtual ICollection<Account> Accounts { get; set; }
     }
 }
