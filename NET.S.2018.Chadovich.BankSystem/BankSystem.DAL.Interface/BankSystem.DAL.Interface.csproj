@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DalAccount.cs" />
-    <Compile Include="DTO\DalHolder.cs" />
+    <Compile Include="DTO\AccountDTO.cs" />
+    <Compile Include="DTO\HolderDTO.cs" />
     <Compile Include="DTO\IEntity.cs" />
+    <Compile Include="DTO\TypeSettingsDTO.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IHolderRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />

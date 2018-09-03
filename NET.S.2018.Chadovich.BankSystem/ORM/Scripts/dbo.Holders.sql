@@ -3,7 +3,7 @@
     [FullName]    NVARCHAR (50) NOT NULL,
 	[Email]		  NVARCHAR (50) NOT NULL,
     [IsActive]    BIT           NOT NULL,
-    [AccountIBAN] NVARCHAR (50) NULL,
+    [AccountIBAN] NVARCHAR (50) NULL,	-- remove
     PRIMARY KEY CLUSTERED ([PassportId] ASC)
 );
 

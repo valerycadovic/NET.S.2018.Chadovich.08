@@ -9,71 +9,71 @@
 
     public class FakeAccountRepository : IAccountRepository
     {
-        private readonly ICollection<DalAccount> _accounts;
+        private readonly ICollection<AccountDTO> _accounts;
 
         public FakeAccountRepository()
         {
-            _accounts = new HashSet<DalAccount>
+            _accounts = new HashSet<AccountDTO>
             {
-                new DalAccount
+                new AccountDTO
                 {
                     Balance = 100.00m,
                     Bonuses = 10,
                     DepositBonuses = 5,
                     WithdrawalBonuses = 4,
-                    Holder = new DalHolder
+                    Holder = new HolderDTO
                     {
                         Email = "valerachad03@gmail.com",
                         Name = "Valery Chadovich"
                     }
                 },
 
-                new DalAccount
+                new AccountDTO
                 {
                     Balance = 200.00m,
                     Bonuses = 20,
                     DepositBonuses = 10,
                     WithdrawalBonuses = 4,
-                    Holder = new DalHolder
+                    Holder = new HolderDTO
                     {
                         Email = "katy.lap99@gmail.com",
                         Name = "Kate Lapotko"
                     }
                 },
 
-                new DalAccount
+                new AccountDTO
                 {
                     Balance = 20.00m,
                     Bonuses = 5,
                     DepositBonuses = 15,
                     WithdrawalBonuses = 6,
-                    Holder = new DalHolder
+                    Holder = new HolderDTO
                     {
                         Email = "anton.apanovich@gmail.com",
                         Name = "Anton Apanovich"
                     }
                 },
 
-                new DalAccount
+                new AccountDTO
                 {
                     Balance = 100.50m,
                     Bonuses = 5,
                     DepositBonuses = 4,
                     WithdrawalBonuses = 6,
-                    Holder = new DalHolder
+                    Holder = new HolderDTO
                     {
                         Email = "andrej.sozykin@gmail.com",
                         Name = "ALYOSHA Kanunnikov"
                     }
                 },
 
-                new DalAccount
+                new AccountDTO
                 {
                     Balance = 0.01m,
                     Bonuses = 100,
                     DepositBonuses = 100,
                     WithdrawalBonuses = 1,
-                    Holder = new DalHolder
+                    Holder = new HolderDTO
                     {
                         Email = "smotrite.ya.uchu.python79@narhoz.ded",
                         Name = "Artur Prazhenik"
@@ -83,14 +83,14 @@
         }
         
 
-        public IEnumerable<DalAccount> GetAll() => _accounts;
+        public IEnumerable<AccountDTO> GetAll() => _accounts;
         
-        public DalAccount GetById(int key) => _accounts.FirstOrDefault(e => e.Id == key);
+        public AccountDTO GetById(int key) => _accounts.FirstOrDefault(e => e.Id == key);
 
-        public DalAccount GetByPredicate(Expression<Func<DalAccount, bool>> f)
+        public AccountDTO GetByPredicate(Expression<Func<AccountDTO, bool>> f)
             => _accounts.FirstOrDefault(f.Compile());
 
-        public void Create(DalAccount e)
+        public void Create(AccountDTO e)
         {
             if (e == null)
             {
@@ -100,7 +100,7 @@
             _accounts.Add(e);
         }
 
-        public void Delete(DalAccount e)
+        public void Delete(AccountDTO e)
         {
             if (e == null)
             {
@@ -110,7 +110,7 @@
             _accounts.Remove(e);
         }
 
-        public void Update(DalAccount e)
+        public void Update(AccountDTO e)
         {
             if (e == null)
             {

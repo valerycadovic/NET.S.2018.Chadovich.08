@@ -105,6 +105,5 @@
     <Content Include="Scripts\dbo.Holders.sql" />
     <Content Include="Scripts\dbo.TypeSettings.sql" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

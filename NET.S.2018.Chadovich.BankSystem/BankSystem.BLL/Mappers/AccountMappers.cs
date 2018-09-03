@@ -7,15 +7,15 @@ namespace BankSystem.BLL.Mappers
 {
     public static class AccountMappers
     {
-        public static DalAccount ToDal(this Account account)
+        public static AccountDTO ToDal(this Account account)
         {
-            var holder = new DalHolder
+            var holder = new HolderDTO
             {
                 Email = account.Holder.Email,
                 Name = account.Holder.Name
             };
 
-            var dal_account = new DalAccount
+            var dal_account = new AccountDTO
             {
                 Holder = holder,
                 Balance = account.Balance,
@@ -23,11 +23,11 @@ namespace BankSystem.BLL.Mappers
                 Number = account.Number,
             };
 
-            holder.Accounts = new List<DalAccount> {dal_account};
+            holder.Accounts = new List<AccountDTO> {dal_account};
             return dal_account;
         }
 
-        public static Account ToBllAccount(this DalAccount account)
+        public static Account ToBllAccount(this AccountDTO account)
         {
             throw new NotImplementedException();
         }

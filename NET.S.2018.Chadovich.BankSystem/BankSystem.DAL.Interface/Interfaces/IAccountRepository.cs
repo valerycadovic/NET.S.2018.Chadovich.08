@@ -2,7 +2,7 @@
 {
     using DTO;
 
-    public interface IAccountRepository : IRepository<DalAccount>
+    public interface IAccountRepository : IRepository<AccountDTO>
     {
     }
 }

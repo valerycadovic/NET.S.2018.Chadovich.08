@@ -11,32 +11,32 @@ namespace DAL.ORM.Repositories
 {
     public class HolderRepository : IHolderRepository
     {
-        public IEnumerable<DalHolder> GetAll()
+        public IEnumerable<HolderDTO> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public DalHolder GetById(int key)
+        public HolderDTO GetById(int key)
+        {
+            throw new NotImplementedException();
+        }
+        
+        public HolderDTO GetByPredicate(Expression<Func<HolderDTO, bool>> f)
         {
             throw new NotImplementedException();
         }
 
-        public DalHolder GetByPredicate(Expression<Func<DalHolder, bool>> f)
+        public void Create(HolderDTO e)
         {
             throw new NotImplementedException();
         }
 
-        public void Create(DalHolder e)
+        public void Delete(HolderDTO e)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(DalHolder e)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(DalHolder e)
+        public void Update(HolderDTO e)
         {
             throw new NotImplementedException();
         }

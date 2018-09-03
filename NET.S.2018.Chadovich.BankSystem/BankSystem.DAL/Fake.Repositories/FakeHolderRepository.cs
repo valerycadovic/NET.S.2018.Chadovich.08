@@ -9,20 +9,20 @@
 
     public class FakeHolderRepository : IHolderRepository
     {
-        private readonly ICollection<DalHolder> _holders;
+        private readonly ICollection<HolderDTO> _holders;
 
         public FakeHolderRepository()
         {
-            _holders = new HashSet<DalHolder>
+            _holders = new HashSet<HolderDTO>
             {
-                new DalHolder
+                new HolderDTO
                 {
                     Id = 0,
                     Email = "valerachad03@gmail.com",
                     Name = "Valery Chadovich",
-                    Accounts = new HashSet<DalAccount>
+                    Accounts = new HashSet<AccountDTO>
                     {
-                        new DalAccount
+                        new AccountDTO
                         {
                             Balance = 100.00m,
                             Bonuses = 100,
@@ -31,14 +31,14 @@
                         }
                     }
                 },
-                new DalHolder
+                new HolderDTO
                 {
                     Id = 0,
                     Email = "valerachad04@gmail.com",
                     Name = "Valery Cadovic",
-                    Accounts = new HashSet<DalAccount>
+                    Accounts = new HashSet<AccountDTO>
                     {
-                        new DalAccount
+                        new AccountDTO
                         {
                             Balance = 10000.00m,
                             Bonuses = 1000,
@@ -51,13 +51,13 @@
             };
         }
 
-        public IEnumerable<DalHolder> GetAll() => _holders;
+        public IEnumerable<HolderDTO> GetAll() => _holders;
 
-        public DalHolder GetById(int key) => _holders.FirstOrDefault(h => h.Id == key);
+        public HolderDTO GetById(int key) => _holders.FirstOrDefault(h => h.Id == key);
 
-        public DalHolder GetByPredicate(Expression<Func<DalHolder, bool>> f) => _holders.FirstOrDefault(f.Compile());
+        public HolderDTO GetByPredicate(Expression<Func<HolderDTO, bool>> f) => _holders.FirstOrDefault(f.Compile());
 
-        public void Create(DalHolder e)
+        public void Create(HolderDTO e)
         {
             if (e == null)
             {
@@ -67,7 +67,7 @@
             _holders.Add(e);
         }
         
-        public void Delete(DalHolder e)
+        public void Delete(HolderDTO e)
         {
             if (e == null)
             {
@@ -77,7 +77,7 @@
             _holders.Remove(e);
         }
 
-        public void Update(DalHolder e)
+        public void Update(HolderDTO e)
         {
             if (e == null)
             {

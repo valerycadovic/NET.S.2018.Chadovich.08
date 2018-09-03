@@ -11,32 +11,32 @@ namespace DAL.ORM.Repositories
 {
     public class AccountRepository : IAccountRepository
     {
-        public IEnumerable<DalAccount> GetAll()
+        public IEnumerable<AccountDTO> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public DalAccount GetById(int key)
+        public AccountDTO GetById(int key)
         {
             throw new NotImplementedException();
         }
 
-        public DalAccount GetByPredicate(Expression<Func<DalAccount, bool>> f)
+        public AccountDTO GetByPredicate(Expression<Func<AccountDTO, bool>> f)
         {
             throw new NotImplementedException();
         }
 
-        public void Create(DalAccount e)
+        public void Create(AccountDTO e)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(DalAccount e)
+        public void Delete(AccountDTO e)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(DalAccount e)
+        public void Update(AccountDTO e)
         {
             throw new NotImplementedException();
         }

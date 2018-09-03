@@ -2,14 +2,22 @@
 
 namespace BankSystem.DAL.Interface.DTO
 {
-    public class DalHolder : IEntity
+    public class HolderDTO : IEntity<string>
     {
-        public int Id { get; set; }
-        
-        public string Name { get; set; }
+        public string PassportId { get; set; }
+
+        public string FullName { get; set; }
 
         public string Email { get; set; }
 
-        public IEnumerable<DalAccount> Accounts { get; set; }
+        public bool IsActive { get; set; }
+
+        public IEnumerable<AccountDTO> Accounts { get; set; } = new HashSet<AccountDTO>();
+
+        string IEntity<string>.Id
+        {
+            get => PassportId;
+            set => PassportId = value;
+        }
     }
 }

@@ -2,7 +2,7 @@
 {
     using DTO;
 
-    public interface IHolderRepository : IRepository<DalHolder>
+    public interface IHolderRepository : IRepository<HolderDTO>
     {
     }
 }

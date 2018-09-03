@@ -21,9 +21,13 @@ namespace ORM.Model
         }
     
         public string PassportId { get; set; }
+
         public string FullName { get; set; }
+
         public string Email { get; set; }
+
         public bool IsActive { get; set; }
+
         public string AccountIBAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

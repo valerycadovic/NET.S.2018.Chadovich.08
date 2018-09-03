@@ -1,7 +1,7 @@
 ﻿namespace BankSystem.DAL.Interface.DTO
 {
-    public interface IEntity
+    public interface IEntity<T>
     {
-        int Id { get; set; }
+        T Id { get; set; }
     }
 }
